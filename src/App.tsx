@@ -1,13 +1,17 @@
-import { useState } from 'react'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import LoginPage from './LoginPage';
+import TopTracksPage from './TopTracksPage';
 
-function App() {
-  let [value] = useState('!')
+const App: React.FC = () => {
   return (
-    <>
-      <h1>Hello World{value}</h1>
-    </>
-  )
-}
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/top-tracks" element={<TopTracksPage />} />
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
+export default App;
