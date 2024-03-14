@@ -1,14 +1,16 @@
+//graph.tsx
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import * as d3 from 'd3';
 import SongInfo from './SongInfo';
+import WelcomeMessage from './WelcomeMessage';
 
 const similarityThreshold = 0.875;
 
 const GraphContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: #191414;
+  background-color: #141414;
 `;
 
 interface Node extends d3.SimulationNodeDatum {
@@ -46,7 +48,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 		const fetchTopTracks = async () => {
 			if (accessToken) {
 				try {
-					const response = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=50', {
+					const response = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=40', {
 						headers: {
 							Authorization: `Bearer ${accessToken}`,
 						},
@@ -145,7 +147,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 		  .force('link', d3.forceLink(links).id((d: any) => d.id).distance(180))
 		  .force('charge', d3.forceManyBody().strength(-500))
 		  .force('center', d3.forceCenter(width / 2, height / 2))
-		  .force('collision', d3.forceCollide().radius(60))
+		  .force('collision', d3.forceCollide().radius(40))
 		  .force('x', d3.forceX(width / 2).strength(0.05))
 		  .force('y', d3.forceY(height / 2).strength(0.05));
 	  
@@ -259,11 +261,13 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 		  <svg ref={svgRef} width="80%" height="100%">
 			<rect width="100%" height="100%" fill="none" stroke="black" strokeWidth="4" />
 		  </svg>
-		  {selectedNode && (
+			{selectedNode ? (
 			<SongInfo node={selectedNode} onClose={() => setSelectedNode(null)} />
-		  )}
-		</GraphContainer>
-	  );
+			) : (
+			<WelcomeMessage />
+			)}
+	</GraphContainer>
+);
 	};
 	
 	export type { Node };

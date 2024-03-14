@@ -1,13 +1,22 @@
+// LoginPage.tsx
 import styled from 'styled-components';
+import Particles from './components/Particle';
 
 const LoginContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #191414;;
+  background-color: #141414;
   color: white;
+`;
+
+const LoginContent = styled.div`
+  position: relative;
+  z-index: 1;
+  text-align: center;
 `;
 
 const LoginButton = styled.button`
@@ -20,6 +29,15 @@ const LoginButton = styled.button`
   cursor: pointer;
 `;
 
+const ParticleBackground = styled(Particles)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+`;
+
 const LoginPage = () => {
   const handleLogin = () => {
     const clientId = '93f246bc76aa40d2bcbd870aec1d3777';
@@ -30,8 +48,11 @@ const LoginPage = () => {
 
   return (
     <LoginContainer>
-      <h1>Login with Spotify</h1>
-      <LoginButton onClick={handleLogin}>Login</LoginButton>
+      <ParticleBackground />
+      <LoginContent>
+        <h1>Login with Spotify</h1>
+        <LoginButton onClick={handleLogin}>Login</LoginButton>
+      </LoginContent>
     </LoginContainer>
   );
 };
