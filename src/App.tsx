@@ -5,33 +5,33 @@ import { fetchAccessToken } from './backend/AuthService';
 import { useState, useEffect } from 'react';
 
 interface PageWithAccessTokenProps {
-  component: React.ComponentType<{ accessToken: string | null }>;
+	component: React.ComponentType<{ accessToken: string | null }>;
 }
 
 const PageWithAccessToken: React.FC<PageWithAccessTokenProps> = ({ component: Component }) => {
-  const [accessToken, setAccessToken] = useState<string | null>(null);
+	const [accessToken, setAccessToken] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchToken = async () => {
-      const token = await fetchAccessToken();
-      setAccessToken(token);
-    };
+	useEffect(() => {
+		const fetchToken = async () => {
+			const token = await fetchAccessToken();
+			setAccessToken(token);
+		};
 
-    fetchToken();
-  }, []);
+		fetchToken();
+	}, []);
 
-  return <Component accessToken={accessToken} />;
+	return <Component accessToken={accessToken} />;
 };
 
 const App = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/mainPage" element={<PageWithAccessToken component={Graph} />} />
-      </Routes>
-    </Router>
-  );
+	return (
+		<Router>
+			<Routes>
+				<Route path="/" element={<LoginPage />} />
+				<Route path="/mainPage" element={<PageWithAccessToken component={Graph} />} />
+			</Routes>
+		</Router>
+	);
 };
 
 export default App;
