@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 const LoginContainer = styled.div`
@@ -7,7 +6,7 @@ const LoginContainer = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: black;
+  background-color: #191414;;
   color: white;
 `;
 
