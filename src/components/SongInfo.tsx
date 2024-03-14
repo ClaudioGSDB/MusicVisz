@@ -7,7 +7,7 @@ const SongInfoContainer = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  width: 30%;
+  width: 20%;
   height: 100%;
   background-color: #282828;
   padding: 20px;

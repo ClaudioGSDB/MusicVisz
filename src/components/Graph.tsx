@@ -256,7 +256,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 
 	return (
 		<GraphContainer>
-		  <svg ref={svgRef} width="70%" height="100%">
+		  <svg ref={svgRef} width="80%" height="100%">
 			<rect width="100%" height="100%" fill="none" stroke="black" strokeWidth="4" />
 		  </svg>
 		  {selectedNode && (
