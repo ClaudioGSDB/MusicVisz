@@ -12,7 +12,7 @@ SpotifyVisz is an interactive visualization tool that allows you to explore the 
 
 ## Getting Started
 
-To use SpotifyVisz, simply visit our hosted website at [SpotifyVisz](https://your-spotifyvisz-url.vercel.app).
+To use SpotifyVisz, simply visit our hosted website at [SpotifyVisz](https://spotifyvisz.vercel.app/).
 
 1. Click on the "Login" button to authenticate with your Spotify account and grant the necessary permissions.
 
