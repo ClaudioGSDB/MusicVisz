@@ -4,11 +4,12 @@ import { Buffer } from 'buffer';
 import cors from 'cors';
 
 const app = express();
+const port = 3001;
 
 // Enable CORS for all requests
 app.use(cors());
 app.use(express.json());
-
+//hiii
 // Directly embedding Spotify Client ID and Client Secret
 const CLIENT_ID = '93f246bc76aa40d2bcbd870aec1d3777';
 const CLIENT_SECRET = '25d599c63b9a45b6ba7805dda8fd6db7';
@@ -25,7 +26,7 @@ app.post('/exchange', async (req, res) => {
     body: new URLSearchParams({
       grant_type: 'authorization_code',
       code,
-      redirect_uri: 'https://spotifyvisz.vercel.app/main', // Ensure this matches your frontend redirect URI
+      redirect_uri: 'http://localhost:5173/mainPage', // Ensure this matches your frontend redirect URI
     }),
   });
 
@@ -38,4 +39,8 @@ app.post('/exchange', async (req, res) => {
   } else {
     res.status(response.status).json({ error: 'Failed to obtain access token', details: data });
   }
+});
+
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
 });
