@@ -50,7 +50,7 @@ const AlbumCover = styled.img`
   width: 200px;
   height: 200px;
   object-fit: cover;
-  margin-right: 20px;
+  margin-right: 10%;
   border-radius: 8px;
     box-shadow: 0 5px 30px rgba(0, 0, 0, 0.7);
     transition: transform 0.5s ease-in-out;
@@ -134,45 +134,45 @@ interface SongInfoProps {
 }
 
 const SongInfo: React.FC<SongInfoProps> = ({ node, onClose }) => {
-    const { name, albumCoverUrl, audioFeatures } = node;
-    const [backgroundColor, setBackgroundColor] = useState('#282828');
-  
-    useEffect(() => {
-      const fetchBackgroundColor = async () => {
-        try {
-          const colorThief = new ColorThief();
-          const img = new Image();
-          img.src = albumCoverUrl;
-          img.crossOrigin = 'Anonymous';
-  
-          img.addEventListener('load', () => {
-            const color = colorThief.getColor(img);
-            const hexColor = rgbToHex(color[0], color[1], color[2]);
-            setBackgroundColor(hexColor);
-          });
-        } catch (error) {
-          console.error('Error extracting dominant color:', error);
-        }
-      };
-  
-      fetchBackgroundColor();
-    }, [albumCoverUrl]);
-  
-    const rgbToHex = (r: number, g: number, b: number) => {
-      const componentToHex = (c: number) => {
-        const hex = c.toString(16);
-        return hex.length === 1 ? '0' + hex : hex;
-      };
-  
-      return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
+  const { name, albumCoverUrl, audioFeatures } = node;
+  const [backgroundColor, setBackgroundColor] = useState('#282828');
+
+  useEffect(() => {
+    const fetchBackgroundColor = async () => {
+      try {
+        const colorThief = new ColorThief();
+        const img = new Image();
+        img.src = albumCoverUrl;
+        img.crossOrigin = 'Anonymous';
+
+        img.addEventListener('load', () => {
+          const color = colorThief.getColor(img);
+          const hexColor = rgbToHex(color[0], color[1], color[2]);
+          setBackgroundColor(hexColor);
+        });
+      } catch (error) {
+        console.error('Error extracting dominant color:', error);
+      }
     };
-  
-    const normalizeValue = (value: number, min: number, max: number) => {
-      return (value - min) / (max - min);
+
+    fetchBackgroundColor();
+  }, [albumCoverUrl]);
+
+  const rgbToHex = (r: number, g: number, b: number) => {
+    const componentToHex = (c: number) => {
+      const hex = c.toString(16);
+      return hex.length === 1 ? '0' + hex : hex;
     };
-  
-    return (
-      <SongInfoContainer style={{ backgroundColor }}>
+
+    return '#' + componentToHex(r) + componentToHex(g) + componentToHex(b);
+  };
+
+  const normalizeValue = (value: number, min: number, max: number) => {
+    return (value - min) / (max - min);
+  };
+
+  return (
+    <SongInfoContainer style={{ backgroundColor }}>
       <CloseButton onClick={onClose}>&times;</CloseButton>
       <SongTitle $longName={name.length > 30}>{name}</SongTitle>
       <ArtistName>{node.artists.join(', ')}</ArtistName>

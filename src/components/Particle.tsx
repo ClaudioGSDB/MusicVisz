@@ -8,7 +8,7 @@ const App = () => {
     const particlesInit = useCallback(async (engine: Engine) => {
         console.log(engine);
         await loadSlim(engine);
-    }, []); 
+    }, []);
 
     const particlesLoaded = useCallback(async (container: Container | undefined) => {
         await console.log(container);
@@ -21,7 +21,7 @@ const App = () => {
             options={{
                 background: {
                     color: {
-                        value: "#080808",
+                        value: "#0C0C0C",
                     },
                 },
                 fpsLimit: 120,
