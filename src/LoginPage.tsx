@@ -59,7 +59,7 @@ color: #B3B3B3;
 const LoginPage: React.FC = () => {
   const handleLogin = async () => {
     const clientId = '80238562c5cf4d678598a7ac2f2d4377';
-    const redirectUri = encodeURIComponent('http://localhost:5173');
+    const redirectUri = encodeURIComponent('https://spotifyvisz.vercel.app');
     const scopes = encodeURIComponent('user-top-read');
     window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scopes}&show_dialog=true`;
   };

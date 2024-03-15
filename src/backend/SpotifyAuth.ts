@@ -2,7 +2,7 @@
 
 const CLIENT_ID = '80238562c5cf4d678598a7ac2f2d4377';
 const CLIENT_SECRET = '543c6bfbdb71495388af6b6a45083ddf';
-const REDIRECT_URI = 'http://localhost:5173';
+const REDIRECT_URI = 'https://spotifyvisz.vercel.app';
 
 const getAccessToken = async (code: string): Promise<string> => {
   const tokenEndpoint = 'https://accounts.spotify.com/api/token';
