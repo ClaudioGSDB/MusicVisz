@@ -59,7 +59,7 @@ color: #B3B3B3;
 const LoginPage: React.FC = () => {
   const handleLogin = async () => {
     const clientId = process.env.CLIENT_ID;
-    const redirectUri = encodeURIComponent(process.env.REDIRECT_URI!);
+    const redirectUri = encodeURIComponent(import.meta.env.REDIRECT_URI);
     const scopes = encodeURIComponent('user-top-read');
     window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scopes}&show_dialog=true`;
   };
@@ -69,7 +69,7 @@ const LoginPage: React.FC = () => {
       <ParticleBackground />
       <LoginContent>
         <Title>MusicVisz</Title>
-        <Slang> Welcome to MusicVisz! Click the login button below to get started and see your personalized Spotify visualizations.</Slang>
+        <Slang> Welcome to <b>MusicVisz</b>!<br></br> Click the login button below to get started and see your personalized Spotify visualizations.</Slang>
         <LoginButton onClick={handleLogin}>Login With Spotify</LoginButton>
       </LoginContent>
     </LoginContainer>
