@@ -186,7 +186,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 			.attr('visibility', 'hidden')
 			.call(drag(simulation) as any);
 
-		const handleMouseOver = (event: any, d: Node) => {
+		const handleMouseOver = (d: Node) => {
 			nodeGroup
 				.selectAll('circle')
 				.filter((_, i) => i === nodes.indexOf(d))
@@ -194,13 +194,13 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 				.duration(250)
 				.ease(d3.easeQuadInOut)
 				.attr('r', 50)
-				.style('filter', 'brightness(70%)');
+				.style('filter', 'brightness(30%)');
 
 			label.filter((_, i) => i === nodes.indexOf(d))
 				.attr('visibility', 'visible');
 		};
 
-		const handleMouseOut = (event: any, d: Node) => {
+		const handleMouseOut = (d: Node) => {
 			nodeGroup
 				.selectAll('circle')
 				.filter((_, i) => i === nodes.indexOf(d))
@@ -215,13 +215,13 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 		};
 		nodeGroup
 			.selectAll('circle')
-			.on('mouseover', function (event, d) { handleMouseOver(event, d as Node); })
-			.on('mouseout', function (event, d) { handleMouseOut(event, d as Node); })
-			.on('click', function (event, d) { setSelectedNode(d as Node); });
+			.on('mouseover', function (_, d) { handleMouseOver(d as Node); })
+			.on('mouseout', function (_, d) { handleMouseOut(d as Node); })
+			.on('click', function (_, d) { setSelectedNode(d as Node); });
 
 		label
-			.on('mouseover', function (_, d) { handleMouseOver(_, d as Node); })
-			.on('mouseout', function (_, d) { handleMouseOut(_, d as Node); })
+			.on('mouseover', function (_, d) { handleMouseOver(d as Node); })
+			.on('mouseout', function (_, d) { handleMouseOut(d as Node); })
 			.on('click', function (_, d) { setSelectedNode(d as Node); });
 		simulation.on('tick', () => {
 			link
