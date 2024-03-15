@@ -1,8 +1,9 @@
-{
-	"routes": [
-	  {
-		"src": "/exchange",
-		"dest": "server.js"
-	  }
-	]
-  }
+{ 
+	"rewrites": 
+	[
+		{ 
+			"source": "/(.*)", 
+			"destination": "/" 
+		}
+	] 
+}
