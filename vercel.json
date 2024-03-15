@@ -1,8 +1,8 @@
 {
 	"routes": [
 	  {
-		"src": "/main",
-		"dest": "/index.html"
+		"src": "/exchange",
+		"dest": "server.js"
 	  }
 	]
   }
