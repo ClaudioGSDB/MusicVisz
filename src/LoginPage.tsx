@@ -1,6 +1,7 @@
 // LoginPage.tsx
 import styled from 'styled-components';
 import Particles from './components/Particle';
+import dotenv from 'dotenv';
 
 
 const LoginContainer = styled.div`
@@ -58,8 +59,8 @@ color: #B3B3B3;
 
 const LoginPage: React.FC = () => {
   const handleLogin = async () => {
-    const clientId = '80238562c5cf4d678598a7ac2f2d4377';
-    const redirectUri = encodeURIComponent('https://spotifyvisz.vercel.app');
+    const clientId = process.env.CLIENT_ID;
+    const redirectUri = encodeURIComponent(process.env.REDIRECT_URI!);
     const scopes = encodeURIComponent('user-top-read');
     window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scopes}&show_dialog=true`;
   };
@@ -68,9 +69,9 @@ const LoginPage: React.FC = () => {
     <LoginContainer>
       <ParticleBackground />
       <LoginContent>
-        <Title>SpotifyVisz</Title>
-        <Slang>Visualize your Spotify Taste</Slang>
-        <LoginButton onClick={handleLogin}>Login</LoginButton>
+        <Title>MusicVisz</Title>
+        <Slang> Welcome to MusicVisz! Click the login button below to get started and see your personalized Spotify visualizations.</Slang>
+        <LoginButton onClick={handleLogin}>Login With Spotify</LoginButton>
       </LoginContent>
     </LoginContainer>
   );

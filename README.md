@@ -1,6 +1,9 @@
 # SpotifyVisz
 
+## THE APP IS DEVELOPMENT MODE WONT WORK WITH UNAUTHORIZED USERS
+
 SpotifyVisz is an interactive visualization tool that allows you to explore the connections and characteristics of your favorite songs on Spotify. It provides a captivating and immersive experience, revealing the intricate relationships between your top tracks based on their audio features.
+![Sample UI](src/assets/SampleUI.png "Image Title")
 
 ## Features
 
