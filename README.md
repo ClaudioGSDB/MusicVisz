@@ -1,8 +1,8 @@
-# SpotifyVisz
+# MusicVisz
 
 ## THE APP IS DEVELOPMENT MODE WONT WORK WITH UNAUTHORIZED USERS
 
-SpotifyVisz is an interactive visualization tool that allows you to explore the connections and characteristics of your favorite songs on Spotify. It provides a captivating and immersive experience, revealing the intricate relationships between your top tracks based on their audio features.
+MusicVisz is an interactive visualization tool that allows you to explore the connections and characteristics of your favorite songs on Spotify. It provides a captivating and immersive experience, revealing the intricate relationships between your top tracks based on their audio features.
 ![Sample UI](src/assets/SampleUI.png "Image Title")
 
 ## Features
@@ -15,7 +15,7 @@ SpotifyVisz is an interactive visualization tool that allows you to explore the 
 
 ## Getting Started
 
-To use SpotifyVisz, simply visit our hosted website at [SpotifyVisz](https://spotifyvisz.vercel.app/).
+To use MusicVisz, simply visit our hosted website at [MusicVisz](https://musicvisz.vercel.app/).
 
 1. Click on the "Login" button to authenticate with your Spotify account and grant the necessary permissions.
 
@@ -28,11 +28,11 @@ To use SpotifyVisz, simply visit our hosted website at [SpotifyVisz](https://spo
 - Hover over a node to see the song title and enlarge the node size.
 - Click on a node to view detailed information about the song, including audio features and album cover.
 - Drag and rearrange the nodes to explore the graph and discover new connections.
-- Use the "Welcome to SpotifyVisz" panel on the right to learn more about the application and access additional resources.
+- Use the "Welcome to MusicVisz" panel on the right to learn more about the application and access additional resources.
 
 ## Superficial Logic
 
-SpotifyVisz utilizes the following superficial logic to create the visualization:
+MusicVisz utilizes the following superficial logic to create the visualization:
 
 1. Fetching Top Tracks:
 
@@ -60,13 +60,13 @@ SpotifyVisz utilizes the following superficial logic to create the visualization
    - The audio features are presented as progress bars, indicating the normalized value of each feature.
 
 5. Authentication:
-   - SpotifyVisz uses the Spotify OAuth 2.0 authentication flow to obtain an access token.
+   - MusicVisz uses the Spotify OAuth 2.0 authentication flow to obtain an access token.
    - When you click the "Login" button, you are redirected to the Spotify login page to authorize the application.
-   - After successful authentication, you are redirected back to SpotifyVisz with the access token, allowing the application to fetch your top tracks.
+   - After successful authentication, you are redirected back to MusicVisz with the access token, allowing the application to fetch your top tracks.
 
 ## Contributing
 
-Contributions to SpotifyVisz are welcome! If you have any ideas, suggestions, or bug reports, please open an issue on the [GitHub repository](https://github.com/your-username/spotifyvisz/issues). If you'd like to contribute code, please fork the repository and submit a pull request.
+Contributions to MusicVisz are welcome! If you have any ideas, suggestions, or bug reports, please open an issue on the [GitHub repository](https://github.com/your-username/musicvisz/issues). If you'd like to contribute code, please fork the repository and submit a pull request.
 
 ## License
 
@@ -74,7 +74,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Acknowledgements
 
-SpotifyVisz was inspired by the love for music and the desire to explore the connections between songs. It wouldn't have been possible without the amazing Spotify API and the D3.js library for creating the stunning visualizations.
+MusicVisz was inspired by the love for music and the desire to explore the connections between songs. It wouldn't have been possible without the amazing Spotify API and the D3.js library for creating the stunning visualizations.
 
 Special thanks to the following resources and libraries:
 
@@ -85,6 +85,6 @@ Special thanks to the following resources and libraries:
 
 ---
 
-Thank you for using SpotifyVisz! We hope you enjoy exploring your favorite songs and discovering new connections. If you have any questions or feedback, feel free to reach out.
+Thank you for using MusicVisz! We hope you enjoy exploring your favorite songs and discovering new connections. If you have any questions or feedback, feel free to reach out.
 
 Happy visualizing!
