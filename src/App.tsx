@@ -28,7 +28,7 @@ const App = () => {
 		<Router>
 			<Routes>
 				<Route path="/" element={<LoginPage />} />
-				<Route path="/mainPage" element={<PageWithAccessToken component={Graph} />} />
+				<Route path="/main" element={<PageWithAccessToken component={Graph} />} />
 			</Routes>
 		</Router>
 	);
