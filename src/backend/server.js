@@ -13,7 +13,7 @@ app.use(express.json());
 const CLIENT_ID = '93f246bc76aa40d2bcbd870aec1d3777';
 const CLIENT_SECRET = '25d599c63b9a45b6ba7805dda8fd6db7';
 
-app.post('/api/exchange', async (req, res) => {
+app.post('/exchange', async (req, res) => {
   const { code } = req.body;
   const basicHeader = Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64');
   const response = await fetch('https://accounts.spotify.com/api/token', {

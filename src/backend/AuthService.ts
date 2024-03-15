@@ -4,7 +4,7 @@ export const fetchAccessToken = async (): Promise<string | null> => {
   
 	if (code) {
 	  try {
-		const response = await fetch('https://spotifyvisz.vercel.app/api/exchange', {
+		const response = await fetch('https://spotifyvisz.vercel.app/exchange', {
 		  method: 'POST',
 		  headers: {
 			'Content-Type': 'application/json',
