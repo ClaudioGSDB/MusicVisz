@@ -58,7 +58,7 @@ color: #B3B3B3;
 
 const LoginPage: React.FC = () => {
   const handleLogin = async () => {
-    const clientId = process.env.VITE_CLIENT_ID;
+    const clientId = import.meta.env.VITE_CLIENT_ID;
     const redirectUri = encodeURIComponent(import.meta.env.VITE_REDIRECT_URI);
     const scopes = encodeURIComponent('user-top-read');
     window.location.href = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=${scopes}&show_dialog=true`;
