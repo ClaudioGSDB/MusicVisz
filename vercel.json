@@ -2,7 +2,7 @@
 	"routes": [
 	  {
 		"src": "/exchange",
-		"dest": "./src/backend/server.js"
+		"dest": "server.js"
 	  }
 	]
   }
