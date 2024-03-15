@@ -1,0 +1,8 @@
+{
+	"routes": [
+	  {
+		"src": "/mainPage",
+		"dest": "/index.html"
+	  }
+	]
+  }

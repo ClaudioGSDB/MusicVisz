@@ -26,7 +26,7 @@ app.post('/exchange', async (req, res) => {
     body: new URLSearchParams({
       grant_type: 'authorization_code',
       code,
-      redirect_uri: 'http://localhost:5173/mainPage', // Ensure this matches your frontend redirect URI
+      redirect_uri: 'https://spotifyvisz.vercel.app/main', // Ensure this matches your frontend redirect URI
     }),
   });
 
