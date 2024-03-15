@@ -1,37 +1,28 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LoginPage from './LoginPage';
+import React, { useState, useEffect } from 'react';
+import { getAccessToken } from './backend/SpotifyAuth';
 import Graph from './components/Graph';
-import { fetchAccessToken } from './backend/AuthService';
-import { useState, useEffect } from 'react';
+import LoginPage from './LoginPage';
 
-interface PageWithAccessTokenProps {
-	component: React.ComponentType<{ accessToken: string | null }>;
-}
-
-const PageWithAccessToken: React.FC<PageWithAccessTokenProps> = ({ component: Component }) => {
+const App: React.FC = () => {
 	const [accessToken, setAccessToken] = useState<string | null>(null);
 
 	useEffect(() => {
-		const fetchToken = async () => {
-			const token = await fetchAccessToken();
-			setAccessToken(token);
+		const fetchAccessToken = async () => {
+			try {
+				const code = new URLSearchParams(window.location.search).get('code');
+				if (code) {
+					const token = await getAccessToken(code);
+					setAccessToken(token);
+				}
+			} catch (error) {
+				console.error('Failed to fetch access token:', error);
+			}
 		};
 
-		fetchToken();
+		fetchAccessToken();
 	}, []);
 
-	return <Component accessToken={accessToken} />;
-};
-
-const App = () => {
-	return (
-		<Router>
-			<Routes>
-				<Route path="/" element={<LoginPage />} />
-				<Route path="/mainPage" element={<PageWithAccessToken component={Graph} />} />
-			</Routes>
-		</Router>
-	);
+	return <>{accessToken ? <Graph accessToken={accessToken} /> : <LoginPage />}</>;
 };
 
 export default App;

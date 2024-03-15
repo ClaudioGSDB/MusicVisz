@@ -42,7 +42,8 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 	const svgRef = useRef<SVGSVGElement | null>(null);
 	const [nodes, setNodes] = useState<Node[]>([]);
 	const [links, setLinks] = useState<Link[]>([]);
-	const [selectedNode, setSelectedNode] = useState<Node | null>(null);;
+	const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+	const [graphRendered, setGraphRendered] = useState(false);
 
 	useEffect(() => {
 		const fetchTopTracks = async () => {
@@ -122,11 +123,14 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 	}, [accessToken]);
 
 	useEffect(() => {
-		if (nodes.length === 0 || !svgRef.current) return;
+		if (nodes.length === 0 || !svgRef.current || graphRendered) return;
 
 		const svg = d3.select(svgRef.current);
 		const width = parseInt(svg.style('width'));
 		const height = parseInt(svg.style('height'));
+
+		svg.selectAll('*').remove();
+
 
 		const defs = svg.append('defs');
 
@@ -257,6 +261,8 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 			d.fx = null;
 			d.fy = null;
 		};
+
+		setGraphRendered(true);
 
 		return d3.drag<SVGCircleElement | SVGTextElement, Node>()
 			.on('start', dragstarted)
