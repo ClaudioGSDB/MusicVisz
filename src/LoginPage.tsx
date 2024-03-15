@@ -68,7 +68,7 @@ const LoginPage: React.FC = () => {
     <LoginContainer>
       <ParticleBackground />
       <LoginContent>
-        <Title>SpotifyVisz TEST</Title>
+        <Title>SpotifyVisz</Title>
         <Slang>Visualize your Spotify Taste</Slang>
         <LoginButton onClick={handleLogin}>Login</LoginButton>
       </LoginContent>
