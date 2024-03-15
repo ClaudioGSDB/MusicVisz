@@ -1,7 +1,6 @@
 // LoginPage.tsx
 import styled from 'styled-components';
 import Particles from './components/Particle';
-import dotenv from 'dotenv';
 
 
 const LoginContainer = styled.div`
