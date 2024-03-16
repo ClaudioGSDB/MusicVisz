@@ -68,10 +68,6 @@ MusicVisz utilizes the following superficial logic to create the visualization:
 
 Contributions to MusicVisz are welcome! If you have any ideas, suggestions, or bug reports, please open an issue on the [GitHub repository](https://github.com/your-username/musicvisz/issues). If you'd like to contribute code, please fork the repository and submit a pull request.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
 ## Acknowledgements
 
 MusicVisz was inspired by the love for music and the desire to explore the connections between songs. It wouldn't have been possible without the amazing Spotify API and the D3.js library for creating the stunning visualizations.
