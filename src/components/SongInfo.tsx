@@ -88,6 +88,20 @@ const KeyText = styled.p`
   margin-bottom: 5px;
 `;
 
+const Tooltip = styled.div`
+  position: absolute;
+  background-color: #282828;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 10;
+`;
+
 const AttributesList = styled.ul`
   list-style-type: none;
   background-color: #121212;
@@ -96,8 +110,15 @@ const AttributesList = styled.ul`
 `;
 
 const AttributeItem = styled.li`
-    font-size: 18px;
-    margin-bottom: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  position: relative;
+
+  &:hover {
+    ${Tooltip} {
+      opacity: 1;
+    }
+  }
 `;
 
 const ArtistName = styled.p`
@@ -184,39 +205,80 @@ const SongInfo: React.FC<SongInfoProps> = ({ node, onClose }) => {
         </KeyContainer>
       </AlbumCoverContainer>
       <AttributesList>
-        <AttributeItem>
-          Acousticness
-          <AttributeBar value={normalizeValue(audioFeatures.acousticness, 0, 1)} />
-        </AttributeItem>
-        <AttributeItem>
-          Danceability
-          <AttributeBar value={normalizeValue(audioFeatures.danceability, 0, 1)} />
-        </AttributeItem>
-        <AttributeItem>
-          Energy
-          <AttributeBar value={normalizeValue(audioFeatures.energy, 0, 1)} />
-        </AttributeItem>
-        <AttributeItem>
-          Instrumentalness
-          <AttributeBar value={normalizeValue(audioFeatures.instrumentalness, 0, 1)} />
-        </AttributeItem>
-        <AttributeItem>
-          Loudness
-          <AttributeBar value={normalizeValue(audioFeatures.loudness, -27, 0)} />
-        </AttributeItem>
-        <AttributeItem>
-          Speechiness
-          <AttributeBar value={normalizeValue(audioFeatures.speechiness, 0, 1)} />
-        </AttributeItem>
-        <AttributeItem>
-          Tempo
-          <AttributeBar value={normalizeValue(audioFeatures.tempo, 55, 235)} />
-        </AttributeItem>
-        <AttributeItem>
-          Valence
-          <AttributeBar value={normalizeValue(audioFeatures.valence, 0, 1)} />
-        </AttributeItem>
-      </AttributesList>
+  <AttributeItem>
+    Acousticness
+    <AttributeBar value={normalizeValue(audioFeatures.acousticness, 0, 1)} />
+    <Tooltip>
+	Acousticness: {(Number(audioFeatures.acousticness.toFixed(2)) * 100).toFixed(0)}%
+
+      <br />
+      A confidence measure of whether the track <br></br>is acoustic.
+    </Tooltip>
+  </AttributeItem>
+  <AttributeItem>
+    Danceability
+    <AttributeBar value={normalizeValue(audioFeatures.danceability, 0, 1)} />
+    <Tooltip>
+      Danceability: {(Number(audioFeatures.danceability.toFixed(2)) * 100).toFixed(0)}%
+      <br />
+      How suitable a track is for dancing.
+    </Tooltip>
+  </AttributeItem>
+  <AttributeItem>
+    Energy
+    <AttributeBar value={normalizeValue(audioFeatures.energy, 0, 1)} />
+    <Tooltip>
+      Energy: {(Number(audioFeatures.energy.toFixed(2)) * 100).toFixed(0)}%
+      <br />
+      Perceptual measure of intensity and activity.
+    </Tooltip>
+  </AttributeItem>
+  <AttributeItem>
+    Instrumentalness
+    <AttributeBar value={normalizeValue(audioFeatures.instrumentalness, 0, 1)} />
+    <Tooltip>
+      Instrumentalness: {(Number(audioFeatures.instrumentalness.toFixed(2)) * 100).toFixed(0)}%
+      <br />
+      Predicts whether a track contains no vocals.
+    </Tooltip>
+  </AttributeItem>
+  <AttributeItem>
+    Loudness
+    <AttributeBar value={normalizeValue(audioFeatures.loudness, -27, 0)} />
+    <Tooltip>
+      Loudness: {audioFeatures.loudness.toFixed(2)} dB
+      <br />
+      Overall loudness of a track in decibels (dB).
+    </Tooltip>
+  </AttributeItem>
+  <AttributeItem>
+    Speechiness
+    <AttributeBar value={normalizeValue(audioFeatures.speechiness, 0, 1)} />
+    <Tooltip>
+      Speechiness: {(Number(audioFeatures.speechiness.toFixed(2)) * 100).toFixed(0)}%
+      <br />
+      Presence of spoken words in a track.
+    </Tooltip>
+  </AttributeItem>
+  <AttributeItem>
+    Tempo
+    <AttributeBar value={normalizeValue(audioFeatures.tempo, 55, 235)} />
+    <Tooltip>
+      Tempo: {audioFeatures.tempo.toFixed(0)} BPM
+      <br />
+      Overall estimated tempo of a track in <br></br>beats per minute (BPM).
+    </Tooltip>
+  </AttributeItem>
+  <AttributeItem>
+    Valence
+    <AttributeBar value={normalizeValue(audioFeatures.valence, 0, 1)} />
+    <Tooltip>
+      Valence: {(Number(audioFeatures.valence.toFixed(2)) * 100).toFixed(0)}%
+      <br />
+      Musical positiveness conveyed by a track.
+    </Tooltip>
+  </AttributeItem>
+</AttributesList>
     </SongInfoContainer>
   );
 };
