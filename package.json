@@ -4,9 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run dev\"",
+    "start": "\"npm run dev\"",
     "dev": "vite",
-    "server": "node src/backend/server.js",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

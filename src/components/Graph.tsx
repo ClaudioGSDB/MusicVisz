@@ -131,8 +131,15 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 
 		svg.selectAll('*').remove();
 
+		const zoomBehavior = d3.zoom<SVGSVGElement, unknown>()
+			.scaleExtent([0.1, 10])
+			.on('zoom', zoomed);
 
-		const defs = svg.append('defs');
+		const g = svg.append('g');
+
+		svg.call(zoomBehavior as any);
+
+		const defs = g.append('defs');
 
 		defs.selectAll('pattern')
 			.data(nodes)
@@ -144,8 +151,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 			.append('image')
 			.attr('xlink:href', (d) => d.albumCoverUrl || 'path/to/fallback-image.png')
 			.attr('width', 80)
-			.attr('height', 80)
-
+			.attr('height', 80);
 
 		const simulation = d3.forceSimulation(nodes)
 			.force('link', d3.forceLink(links).id((d: any) => d.id).distance(180))
@@ -158,14 +164,14 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 		const colorScale = d3.scaleSequential(d3.interpolateGreens)
 			.domain([similarityThreshold, 0.95]);
 
-		const link = svg.append('g')
+		const link = g.append('g')
 			.selectAll('line')
 			.data(links)
 			.join('line')
 			.attr('stroke', (d) => colorScale(d.similarity))
 			.attr('stroke-width', 2);
 
-		const nodeGroup = svg.append('g');
+		const nodeGroup = g.append('g');
 
 		const node = nodeGroup
 			.selectAll('circle')
@@ -217,6 +223,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 			label.filter((_, i) => i === nodes.indexOf(d))
 				.attr('visibility', 'hidden');
 		};
+
 		nodeGroup
 			.selectAll('circle')
 			.on('mouseover', function (_, d) { handleMouseOver(d as Node); })
@@ -227,6 +234,11 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 			.on('mouseover', function (_, d) { handleMouseOver(d as Node); })
 			.on('mouseout', function (_, d) { handleMouseOut(d as Node); })
 			.on('click', function (_, d) { setSelectedNode(d as Node); });
+
+		function zoomed(event: d3.D3ZoomEvent<SVGSVGElement, unknown>) {
+			g.attr('transform', `translate(${event.transform.x}, ${event.transform.y}) scale(${event.transform.k})`);
+		}
+
 		simulation.on('tick', () => {
 			link
 				.attr('x1', (d) => Math.max(40, Math.min(width - 40, d.source.x ?? 0)))
@@ -242,6 +254,8 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 				.attr('x', (d) => Math.max(40, Math.min(width - 40, d.x ?? 0)))
 				.attr('y', (d) => Math.max(40, Math.min(height - 40, d.y ?? 0))); // Center the text inside the node
 		});
+
+		setGraphRendered(true);
 	}, [nodes, links]);
 
 	const drag = (simulation: d3.Simulation<Node, undefined>) => {
@@ -262,8 +276,6 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 			d.fy = null;
 		};
 
-		setGraphRendered(true);
-
 		return d3.drag<SVGCircleElement | SVGTextElement, Node>()
 			.on('start', dragstarted)
 			.on('drag', dragged)
@@ -272,9 +284,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 
 	return (
 		<GraphContainer>
-			<svg ref={svgRef} width="80%" height="100%">
-				<rect width="100%" height="100%" fill="none" stroke="black" strokeWidth="4" />
-			</svg>
+			<svg ref={svgRef} width="80%" height="100%" />
 			{selectedNode ? (
 				<SongInfo node={selectedNode} onClose={() => setSelectedNode(null)} />
 			) : (
