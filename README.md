@@ -66,7 +66,7 @@ MusicVisz utilizes the following superficial logic to create the visualization:
 
 ## Contributing
 
-Contributions to MusicVisz are welcome! If you have any ideas, suggestions, or bug reports, please open an issue on the [GitHub repository](https://github.com/your-username/musicvisz/issues). If you'd like to contribute code, please fork the repository and submit a pull request.
+Contributions to MusicVisz are welcome! If you have any ideas, suggestions, or bug reports, please open an issue on the [GitHub repository](https://github.com/ClaudioGSDB/SpotifyVisz/issues). If you'd like to contribute code, please fork the repository and submit a pull request.
 
 ## Acknowledgements
 
