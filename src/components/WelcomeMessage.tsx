@@ -13,6 +13,7 @@ const WelcomeContainer = styled.div`
   color: white;
   background-color: #212121;
   display: flex;
+  z-index: 101;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;

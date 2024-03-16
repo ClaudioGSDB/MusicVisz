@@ -27,6 +27,7 @@ const SongInfoContainer = styled.div`
   height: 100%;
   padding: 20px;
   color: white;
+  z-index: 101;
 `;
 
 const CloseButton = styled.button`

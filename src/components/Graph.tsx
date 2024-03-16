@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import * as d3 from 'd3';
 import SongInfo from './SongInfo';
 import WelcomeMessage from './WelcomeMessage';
+import Navbar from './NavBar';
 
 const similarityThreshold = 0.875;
 
@@ -19,18 +20,19 @@ interface Node extends d3.SimulationNodeDatum {
 	artists: string[];
 	albumCoverUrl: string;
 	audioFeatures: {
-		acousticness: number;
-		danceability: number;
-		energy: number;
-		instrumentalness: number;
-		key: number;
-		loudness: number;
-		mode: number;
-		speechiness: number;
-		tempo: number;
-		valence: number;
+	  [key: string]: number;
+	  acousticness: number;
+	  danceability: number;
+	  energy: number;
+	  instrumentalness: number;
+	  key: number;
+	  loudness: number;
+	  mode: number;
+	  speechiness: number;
+	  tempo: number;
+	  valence: number;
 	};
-}
+  }
 
 interface Link extends d3.SimulationLinkDatum<Node> {
 	source: Node;
@@ -157,7 +159,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 			.force('link', d3.forceLink(links).id((d: any) => d.id).distance(180))
 			.force('charge', d3.forceManyBody().strength(-500))
 			.force('center', d3.forceCenter(width / 2, height / 2))
-			.force('collision', d3.forceCollide().radius(40))
+			.force('collision', d3.forceCollide().radius(70))
 			.force('x', d3.forceX(width / 2).strength(0.05))
 			.force('y', d3.forceY(height / 2).strength(0.05));
 
@@ -181,6 +183,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 			.attr('fill', (d) => `url(#${d.id})`)
 			.attr('stroke-width', 2)
 			.attr('stroke', 'black')
+			.attr('cursor', 'pointer')
 			.call(drag(simulation) as any);
 
 		const label = nodeGroup
@@ -191,6 +194,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 			.attr('alignment-baseline', 'middle')
 			.attr('font-size', '14px')
 			.attr('font-weight', 'bold')
+			.attr('cursor', 'pointer')
 			.attr('fill', 'white')
 			.text((d) => d.name)
 			.attr('visibility', 'hidden')
@@ -284,14 +288,15 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 
 	return (
 		<GraphContainer>
-			<svg ref={svgRef} width="80%" height="100%" />
-			{selectedNode ? (
-				<SongInfo node={selectedNode} onClose={() => setSelectedNode(null)} />
-			) : (
-				<WelcomeMessage />
-			)}
+		  <Navbar nodes={nodes} onSelectNode={(node) => setSelectedNode(node)} />
+		  <svg ref={svgRef} width="80%" height="100%" />
+		  {selectedNode ? (
+			<SongInfo node={selectedNode} onClose={() => setSelectedNode(null)} />
+		  ) : (
+			<WelcomeMessage />
+		  )}
 		</GraphContainer>
-	);
+	  );
 };
 
 export type { Node };
