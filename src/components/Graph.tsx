@@ -5,6 +5,7 @@ import * as d3 from 'd3';
 import SongInfo from './SongInfo';
 import WelcomeMessage from './WelcomeMessage';
 import Navbar from './NavBar';
+import GraphExplanation from './GraphExplanation';
 
 const similarityThreshold = 0.875;
 
@@ -46,6 +47,11 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 	const [links, setLinks] = useState<Link[]>([]);
 	const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 	const [graphRendered, setGraphRendered] = useState(false);
+	const [showExplanation, setShowExplanation] = useState(true);
+
+	const handleExplanationClose = () => {
+		setShowExplanation(false);
+	  };
 
 	useEffect(() => {
 		const fetchTopTracks = async () => {
@@ -171,7 +177,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 			.data(links)
 			.join('line')
 			.attr('stroke', (d) => colorScale(d.similarity))
-			.attr('stroke-width', 2);
+			.attr('stroke-width', 2.5);
 
 		const nodeGroup = g.append('g');
 
@@ -262,6 +268,16 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 		setGraphRendered(true);
 	}, [nodes, links]);
 
+	useEffect(() => {
+		if (showExplanation) {
+		  const timer = setTimeout(() => {
+			setShowExplanation(false);
+		  }, 50000); // Hide the explanation after 5 seconds
+	  
+		  return () => clearTimeout(timer);
+		}
+	  }, [showExplanation]);
+
 	const drag = (simulation: d3.Simulation<Node, undefined>) => {
 		const dragstarted = (event: d3.D3DragEvent<SVGCircleElement | SVGTextElement, Node, unknown>, d: Node) => {
 			if (!event.active) simulation.alphaTarget(0.3).restart();
@@ -289,6 +305,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 	return (
 		<GraphContainer>
 		  <Navbar nodes={nodes} onSelectNode={(node) => setSelectedNode(node)} />
+		  {showExplanation && <GraphExplanation onClose={handleExplanationClose} />}
 		  <svg ref={svgRef} width="80%" height="100%" />
 		  {selectedNode ? (
 			<SongInfo node={selectedNode} onClose={() => setSelectedNode(null)} />
