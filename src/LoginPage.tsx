@@ -22,12 +22,21 @@ const LoginContent = styled.div`
 
 const LoginButton = styled.button`
   padding: 10px 20px;
-  background-color: #1DB954;
+  background-color: #212121;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 25px;
   font-size: 16px;
   cursor: pointer;
+  &:hover {
+    scale: 1.05;
+  }
+`;
+
+const SpotifyLogo = styled.img`
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
 `;
 
 const ParticleBackground = styled(Particles)`
@@ -70,7 +79,10 @@ const LoginPage: React.FC = () => {
       <LoginContent>
         <Title>MusicVisz</Title>
         <Slang> Welcome to <b>MusicVisz</b>!<br></br> Click the login button below to get started and see your personalized Spotify visualizations.</Slang>
-        <LoginButton onClick={handleLogin}>Login With Spotify</LoginButton>
+        <LoginButton onClick={handleLogin}>
+          <SpotifyLogo src='src/assets/Spotify_Logo.png' alt="Spotify Logo" />
+          Login With Spotify
+        </LoginButton>
       </LoginContent>
     </LoginContainer>
   );

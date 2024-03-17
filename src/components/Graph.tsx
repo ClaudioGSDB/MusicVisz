@@ -21,19 +21,19 @@ interface Node extends d3.SimulationNodeDatum {
 	artists: string[];
 	albumCoverUrl: string;
 	audioFeatures: {
-	  [key: string]: number;
-	  acousticness: number;
-	  danceability: number;
-	  energy: number;
-	  instrumentalness: number;
-	  key: number;
-	  loudness: number;
-	  mode: number;
-	  speechiness: number;
-	  tempo: number;
-	  valence: number;
+		[key: string]: number;
+		acousticness: number;
+		danceability: number;
+		energy: number;
+		instrumentalness: number;
+		key: number;
+		loudness: number;
+		mode: number;
+		speechiness: number;
+		tempo: number;
+		valence: number;
 	};
-  }
+}
 
 interface Link extends d3.SimulationLinkDatum<Node> {
 	source: Node;
@@ -51,7 +51,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 
 	const handleExplanationClose = () => {
 		setShowExplanation(false);
-	  };
+	};
 
 	useEffect(() => {
 		const fetchTopTracks = async () => {
@@ -270,13 +270,13 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 
 	useEffect(() => {
 		if (showExplanation) {
-		  const timer = setTimeout(() => {
-			setShowExplanation(false);
-		  }, 50000); // Hide the explanation after 5 seconds
-	  
-		  return () => clearTimeout(timer);
+			const timer = setTimeout(() => {
+				setShowExplanation(false);
+			}, 50000); // Hide the explanation after 5 seconds
+
+			return () => clearTimeout(timer);
 		}
-	  }, [showExplanation]);
+	}, [showExplanation]);
 
 	const drag = (simulation: d3.Simulation<Node, undefined>) => {
 		const dragstarted = (event: d3.D3DragEvent<SVGCircleElement | SVGTextElement, Node, unknown>, d: Node) => {
@@ -304,16 +304,16 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 
 	return (
 		<GraphContainer>
-		  <Navbar nodes={nodes} onSelectNode={(node) => setSelectedNode(node)} />
-		  {showExplanation && <GraphExplanation onClose={handleExplanationClose} />}
-		  <svg ref={svgRef} width="80%" height="100%" />
-		  {selectedNode ? (
-			<SongInfo node={selectedNode} onClose={() => setSelectedNode(null)} />
-		  ) : (
-			<WelcomeMessage />
-		  )}
+			<Navbar nodes={nodes} onSelectNode={(node) => setSelectedNode(node)} />
+			{showExplanation && <GraphExplanation onClose={handleExplanationClose} />}
+			<svg ref={svgRef} width="80%" height="100%" />
+			{selectedNode ? (
+				<SongInfo node={selectedNode} onClose={() => setSelectedNode(null)} />
+			) : (
+				<WelcomeMessage />
+			)}
 		</GraphContainer>
-	  );
+	);
 };
 
 export type { Node };
