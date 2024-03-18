@@ -1,6 +1,7 @@
 // LoginPage.tsx
 import styled from 'styled-components';
 import Particles from './components/Particle';
+import spotifyLogo from './assets/SpotifyLogo.png';
 
 
 const LoginContainer = styled.div`
@@ -80,7 +81,7 @@ const LoginPage: React.FC = () => {
         <Title>MusicVisz</Title>
         <Slang> Welcome to <b>MusicVisz</b>!<br></br> Click the login button below to get started and see your personalized Spotify visualizations.</Slang>
         <LoginButton onClick={handleLogin}>
-          <SpotifyLogo src='./assets/Spotify_Logo.png' alt="Spotify Logo" />
+          <SpotifyLogo src={spotifyLogo} alt="Logo" />
           Login With Spotify
         </LoginButton>
       </LoginContent>
