@@ -80,7 +80,7 @@ const LoginPage: React.FC = () => {
         <Title>MusicVisz</Title>
         <Slang> Welcome to <b>MusicVisz</b>!<br></br> Click the login button below to get started and see your personalized Spotify visualizations.</Slang>
         <LoginButton onClick={handleLogin}>
-          <SpotifyLogo src='src/assets/Spotify_Logo.png' alt="Spotify Logo" />
+          <SpotifyLogo src='./assets/Spotify_Logo.png' alt="Spotify Logo" />
           Login With Spotify
         </LoginButton>
       </LoginContent>
