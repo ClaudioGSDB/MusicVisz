@@ -163,7 +163,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 
 		const simulation = d3.forceSimulation(nodes)
 			.force('link', d3.forceLink(links).id((d: any) => d.id).distance(180))
-			.force('charge', d3.forceManyBody().strength(-500))
+			.force('charge', d3.forceManyBody().strength(-650))
 			.force('center', d3.forceCenter(width / 2, height / 2))
 			.force('collision', d3.forceCollide().radius(70))
 			.force('x', d3.forceX(width / 2).strength(0.05))
