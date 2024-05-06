@@ -18,6 +18,17 @@ const WelcomeContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   text-align: center;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    border-radius: 20px 20px 0 0;
+  }
 `;
 
 const ContentWrapper = styled.div`
@@ -30,17 +41,32 @@ const Title = styled.h1`
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
 `;
 
 const Description = styled.p`
   font-size: 18px;
   margin-bottom: 30px;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
 `;
 
 const Instruction = styled.p`
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 40px;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
 `;
 
 const GithubButton = styled.a`
@@ -85,9 +111,9 @@ const WelcomeMessage: React.FC = () => {
   return (
     <WelcomeContainer>
       <ContentWrapper>
-        <Title>Welcome to SpotifyVisz</Title>
+        <Title>Welcome to MusicVisz</Title>
         <Description>
-          SpotifyVisz is a visualization tool that allows you to explore the characteristics of your favorite songs on Spotify.
+          MusicVisz is a visualization tool that allows you to explore the characteristics of your favorite songs on Spotify.
         </Description>
         <Instruction>
           Select a song to see its audio features and discover how it compares to your other top tracks.

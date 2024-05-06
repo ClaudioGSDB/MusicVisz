@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Particles from './components/Particle';
 import spotifyLogo from './assets/SpotifyLogo.png';
 
-
 const LoginContainer = styled.div`
   position: relative;
   display: flex;
@@ -12,13 +11,18 @@ const LoginContainer = styled.div`
   justify-content: center;
   height: 100vh;
   color: white;
-  
 `;
 
 const LoginContent = styled.div`
   position: relative;
   z-index: 1;
   text-align: center;
+  padding: 20px;
+  max-width: 90%;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
 `;
 
 const LoginButton = styled.button`
@@ -29,8 +33,14 @@ const LoginButton = styled.button`
   border-radius: 25px;
   font-size: 16px;
   cursor: pointer;
+
   &:hover {
     scale: 1.05;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    padding: 8px 16px;
   }
 `;
 
@@ -38,6 +48,12 @@ const SpotifyLogo = styled.img`
   width: 28px;
   height: 28px;
   margin-right: 10px;
+
+  @media (max-width: 768px) {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+  }
 `;
 
 const ParticleBackground = styled(Particles)`
@@ -55,15 +71,28 @@ const Title = styled.h1`
   font-family: 'Gill Sans', sans-serif;
   font-weight: 600;
   color: #1DB954;
-  // background: linear-gradient(180deg, #1DB954 0%, #535353 75%, #535353 100%);
-  // -webkit-background-clip: text;
-  // -webkit-text-fill-color: transparent;
+
+  @media (max-width: 1024px) {
+    font-size: 78px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 58px;
+  }
 `;
 
 const Slang = styled.div`
-font-size: 24px;
-margin-bottom: 12px;
-color: #B3B3B3;
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: #B3B3B3;
+
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const LoginPage: React.FC = () => {
@@ -79,7 +108,10 @@ const LoginPage: React.FC = () => {
       <ParticleBackground />
       <LoginContent>
         <Title>MusicVisz</Title>
-        <Slang> Welcome to <b>MusicVisz</b>!<br></br> Click the login button below to get started and see your personalized Spotify visualizations.</Slang>
+        <Slang>
+          Welcome to <b>MusicVisz</b>!<br />
+          Click the login button below to get started and see your personalized Spotify visualizations.
+        </Slang>
         <LoginButton onClick={handleLogin}>
           <SpotifyLogo src={spotifyLogo} alt="Logo" />
           Login With Spotify

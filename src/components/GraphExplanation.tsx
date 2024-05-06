@@ -3,17 +3,22 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const ExplanationContainer = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
   z-index: 1000;
+  max-width: 80%;
+
+  @media (max-width: 768px) {
+    max-width: 90%;
+    padding: 10px;
+  }
 `;
 
 const Title = styled.h2`

@@ -6,14 +6,30 @@ import SongInfo from './SongInfo';
 import WelcomeMessage from './WelcomeMessage';
 import Navbar from './NavBar';
 import GraphExplanation from './GraphExplanation';
+import useMediaQuery from './useMediaQuery';
 
 const similarityThreshold = 0.875;
 
 const GraphContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background-color: #141414;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    height: 100%;
+    min-height: 100vh;
+    padding-bottom: 0px;
+  }
 `;
+
+const GraphSVG = styled.svg`
+  flex: 1;
+  width: 100%;
+  height: 100%;
+`;
+
 
 interface Node extends d3.SimulationNodeDatum {
 	id: string;
@@ -48,6 +64,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 	const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 	const [graphRendered, setGraphRendered] = useState(false);
 	const [showExplanation, setShowExplanation] = useState(true);
+	const isLaptopScreen = useMediaQuery('(min-width: 769px)');
 
 	const handleExplanationClose = () => {
 		setShowExplanation(false);
@@ -161,13 +178,17 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 			.attr('width', 80)
 			.attr('height', 80);
 
+		const nodeRadius = isLaptopScreen ? 40 : 30;
+   		const linkDistance = isLaptopScreen ? 180 : 120;
+    	const forceStrength = isLaptopScreen ? -650 : -400;
+
 		const simulation = d3.forceSimulation(nodes)
-			.force('link', d3.forceLink(links).id((d: any) => d.id).distance(180))
-			.force('charge', d3.forceManyBody().strength(-650))
-			.force('center', d3.forceCenter(width / 2, height / 2))
-			.force('collision', d3.forceCollide().radius(70))
-			.force('x', d3.forceX(width / 2).strength(0.05))
-			.force('y', d3.forceY(height / 2).strength(0.05));
+		.force('link', d3.forceLink(links).id((d: any) => d.id).distance(linkDistance))
+		.force('charge', d3.forceManyBody().strength(forceStrength))
+		.force('center', d3.forceCenter(width / 2, height / 2))
+		.force('collision', d3.forceCollide().radius(nodeRadius))
+		.force('x', d3.forceX(width / 2).strength(0.05))
+		.force('y', d3.forceY(height / 2).strength(0.05));
 
 		const colorScale = d3.scaleSequential(d3.interpolateGreens)
 			.domain([similarityThreshold, 0.95]);
@@ -185,7 +206,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 			.selectAll('circle')
 			.data(nodes)
 			.join('circle')
-			.attr('r', 40)
+			.attr('r', nodeRadius)
 			.attr('fill', (d) => `url(#${d.id})`)
 			.attr('stroke-width', 2)
 			.attr('stroke', 'black')
@@ -198,7 +219,7 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 			.join('text')
 			.attr('text-anchor', 'middle')
 			.attr('alignment-baseline', 'middle')
-			.attr('font-size', '14px')
+			.attr('font-size', isLaptopScreen ? '14px' : '12px')
 			.attr('font-weight', 'bold')
 			.attr('cursor', 'pointer')
 			.attr('fill', 'white')
@@ -213,26 +234,26 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 				.transition()
 				.duration(250)
 				.ease(d3.easeQuadInOut)
-				.attr('r', 50)
+				.attr('r', isLaptopScreen ? 50 : 40)
 				.style('filter', 'brightness(30%)');
-
+		
 			label.filter((_, i) => i === nodes.indexOf(d))
 				.attr('visibility', 'visible');
-		};
+			};
 
-		const handleMouseOut = (d: Node) => {
+			const handleMouseOut = (d: Node) => {
 			nodeGroup
 				.selectAll('circle')
 				.filter((_, i) => i === nodes.indexOf(d))
 				.transition()
 				.duration(250)
 				.ease(d3.easeQuadInOut)
-				.attr('r', 40)
+				.attr('r', nodeRadius)
 				.style('filter', 'brightness(100%)');
-
+		
 			label.filter((_, i) => i === nodes.indexOf(d))
 				.attr('visibility', 'hidden');
-		};
+			};
 
 		nodeGroup
 			.selectAll('circle')
@@ -251,22 +272,22 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 
 		simulation.on('tick', () => {
 			link
-				.attr('x1', (d) => Math.max(40, Math.min(width - 40, d.source.x ?? 0)))
-				.attr('y1', (d) => Math.max(40, Math.min(height - 40, d.source.y ?? 0)))
-				.attr('x2', (d) => Math.max(40, Math.min(width - 40, d.target.x ?? 0)))
-				.attr('y2', (d) => Math.max(40, Math.min(height - 40, d.target.y ?? 0)));
-
+			  .attr('x1', (d) => Math.max(40, Math.min(width - 40, d.source.x ?? 0)))
+			  .attr('y1', (d) => Math.max(40, Math.min(height - 40, d.source.y ?? 0)))
+			  .attr('x2', (d) => Math.max(40, Math.min(width - 40, d.target.x ?? 0)))
+			  .attr('y2', (d) => Math.max(40, Math.min(height - 40, d.target.y ?? 0)));
+	  
 			node
-				.attr('cx', (d) => Math.max(40, Math.min(width - 40, d.x ?? 0)))
-				.attr('cy', (d) => Math.max(40, Math.min(height - 40, d.y ?? 0)));
-
+			  .attr('cx', (d) => Math.max(40, Math.min(width - 40, d.x ?? 0)))
+			  .attr('cy', (d) => Math.max(40, Math.min(height - 40, d.y ?? 0)));
+	  
 			label
-				.attr('x', (d) => Math.max(40, Math.min(width - 40, d.x ?? 0)))
-				.attr('y', (d) => Math.max(40, Math.min(height - 40, d.y ?? 0))); // Center the text inside the node
-		});
+			  .attr('x', (d) => Math.max(40, Math.min(width - 40, d.x ?? 0)))
+			  .attr('y', (d) => Math.max(40, Math.min(height - 40, d.y ?? 0)));
+		  });
 
 		setGraphRendered(true);
-	}, [nodes, links]);
+	}, [nodes, links, isLaptopScreen]);
 
 	useEffect(() => {
 		if (showExplanation) {
@@ -304,16 +325,16 @@ const Graph = ({ accessToken }: { accessToken: string | null }) => {
 
 	return (
 		<GraphContainer>
-			<Navbar nodes={nodes} onSelectNode={(node) => setSelectedNode(node)} />
-			{showExplanation && <GraphExplanation onClose={handleExplanationClose} />}
-			<svg ref={svgRef} width="80%" height="100%" />
-			{selectedNode ? (
-				<SongInfo node={selectedNode} onClose={() => setSelectedNode(null)} />
-			) : (
-				<WelcomeMessage />
-			)}
+		  <Navbar nodes={nodes} onSelectNode={(node) => setSelectedNode(node)} />
+		  {showExplanation && <GraphExplanation onClose={handleExplanationClose} />}
+		  <GraphSVG ref={svgRef} />
+		  {selectedNode ? (
+			<SongInfo node={selectedNode} onClose={() => setSelectedNode(null)} />
+		  ) : (
+			isLaptopScreen && <WelcomeMessage />
+		  )}
 		</GraphContainer>
-	);
+	  );
 };
 
 export type { Node };

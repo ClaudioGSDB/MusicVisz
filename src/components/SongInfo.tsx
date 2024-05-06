@@ -28,6 +28,20 @@ const SongInfoContainer = styled.div`
   padding: 20px;
   color: white;
   z-index: 101;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 7%;
+    border-radius: 20px 20px 0 0;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -39,34 +53,57 @@ const CloseButton = styled.button`
   color: white;
   font-size: 20px;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    top: 10px;
+    right: 10px;
+  }
 `;
 
 
 const AlbumCoverContainer = styled.div`
   display: flex;
+  align-items: center;
   margin-bottom: 20px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+  }
 `;
 
 const AlbumCover = styled.img`
-  width: 200px;
-  height: 200px;
+  width: 50%;
+  height: auto;
   object-fit: cover;
-  margin-right: 10%;
+  margin-right: 10px;
   border-radius: 8px;
-    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.7);
-    transition: transform 0.5s ease-in-out;
-    &:hover {
-      transform: scale(1.05);
-    }
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.7);
+  transition: transform 0.5s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+  }
 `;
 
 const KeyContainer = styled.div`
-    background-color: #121212;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 55px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #121212;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: 10px;
 
-    `;
+  @media (max-width: 768px) {
+    padding: 5%;
+    margin-left: 5%;
+    width: 80px
+  }
+`;
 
 const KeyCircle = styled.div`
   width: 60px;
@@ -79,6 +116,12 @@ const KeyCircle = styled.div`
   align-items: center;
   font-size: 34px;
   font-weight: bold;
+
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
 `;
 
 const KeyText = styled.p`
@@ -87,6 +130,10 @@ const KeyText = styled.p`
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 5px;
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const Tooltip = styled.div`
@@ -108,10 +155,19 @@ const AttributesList = styled.ul`
   background-color: #121212;
   padding: 20px;
   border-radius: 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media (max-width: 768px) {
+    padding: 10px;
+    margin-bottom: 0px;
+  }
 `;
 
 const AttributeItem = styled.li`
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 10px;
   position: relative;
 
@@ -120,11 +176,21 @@ const AttributeItem = styled.li`
       opacity: 1;
     }
   }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
 `;
 
 const ArtistName = styled.p`
-    font-size: 14px;
-    margin-top: -10px;
+  font-size: 14px;
+  margin-top: -10px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    margin-top: -5px;
+  }
 `;
 
 const AttributeBar = styled.div<{ value: number }>`
@@ -132,7 +198,7 @@ const AttributeBar = styled.div<{ value: number }>`
   height: 17px;
   background-color: #555;
   margin-top: 5px;
-    border-radius: 10px;
+  border-radius: 10px;
 
   &::after {
     content: '';
@@ -143,11 +209,20 @@ const AttributeBar = styled.div<{ value: number }>`
     border-radius: 10px;
     transition: width 0.5s ease-in-out;
   }
+
+  @media (max-width: 768px) {
+    height: 12px;
+  }
 `;
 
+
 const SongTitle = styled.h2<{ $longName: boolean }>`
-margin-top: 0;
-font-size: ${({ $longName }) => ($longName ? '31px' : '32px')};
+  margin-top: 0;
+  font-size: ${({ $longName }) => ($longName ? '28px' : '32px')};
+
+  @media (max-width: 768px) {
+    font-size: ${({ $longName }) => ($longName ? '20px' : '24px')};
+  }
 `;
 
 interface SongInfoProps {
@@ -194,17 +269,17 @@ const SongInfo: React.FC<SongInfoProps> = ({ node, onClose }) => {
   };
 
   return (
-    <SongInfoContainer style={{ backgroundColor }}>
-      <CloseButton onClick={onClose}>&times;</CloseButton>
-      <SongTitle $longName={name.length > 30}>{name}</SongTitle>
-      <ArtistName>{node.artists.join(', ')}</ArtistName>
-      <AlbumCoverContainer>
-        <AlbumCover src={albumCoverUrl} alt="Album Cover" />
-        <KeyContainer>
-          <KeyText>Key</KeyText>
-          <KeyCircle>{keyMapping[audioFeatures.key]}</KeyCircle>
-        </KeyContainer>
-      </AlbumCoverContainer>
+        <SongInfoContainer style={{ backgroundColor }}>
+          <CloseButton onClick={onClose}>&times;</CloseButton>
+          <SongTitle $longName={name.length > 30}>{name}</SongTitle>
+          <ArtistName>{node.artists.join(', ')}</ArtistName>
+          <AlbumCoverContainer>
+            <AlbumCover src={albumCoverUrl} alt="Album Cover" />
+            <KeyContainer>
+              <KeyText>Key</KeyText>
+              <KeyCircle>{keyMapping[audioFeatures.key]}</KeyCircle>
+            </KeyContainer>
+          </AlbumCoverContainer>
       <AttributesList>
         <AttributeItem>
           Acousticness

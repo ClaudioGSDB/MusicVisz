@@ -13,6 +13,11 @@ const NavbarContainer = styled.nav`
   display: flex;
   z-index: 100;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 10px 20px;
+  }
 `;
 
 
