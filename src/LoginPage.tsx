@@ -101,10 +101,12 @@ const FooterMessage = styled.div`
   width: 100%;
   text-align: center;
   font-size: 0.85rem;
-  color: #555;
+  color: #e0e0e0; /* Light gray for readability */
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.5); /* Subtle glow effect */
+  font-family: 'Arial', sans-serif;
 
   b {
-    color: #000;
+    color: #ffffff; /* White for emphasis */
   }
 `;
 
