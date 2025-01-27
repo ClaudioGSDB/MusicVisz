@@ -111,6 +111,19 @@ const Message = styled.div`
   }
 `;
 
+const FooterMessage = styled.div`
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #555;
+
+  b {
+    color: #000;
+  }
+`;
+
 const LoginPage: React.FC = () => {
   const handleLogin = async () => {
     const clientId = import.meta.env.VITE_CLIENT_ID;
