@@ -120,27 +120,25 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-  <LoginContainer>
-    <ParticleBackground />
-    <LoginContent>
-      <Title>MusicVisz</Title>
-      <Slang>
-        Welcome to <b>MusicVisz</b>!<br />
-        Click the login button below to get started and see your personalized Spotify visualizations.
-      </Slang>
-      <Message>
-        🚧 <b>App in Development Mode</b> 🚧<br />
-        Unauthorized users cannot access this app at the moment.<br />
-        📩 Interested in using it? Email us at <b>claudiogsdb@gmail.com</b>.
-      </Message>
-      <LoginButton onClick={handleLogin}>
-        <SpotifyLogo src={spotifyLogo} alt="Logo" />
-        Login With Spotify
-      </LoginButton>
-    </LoginContent>
-  </LoginContainer>
-);
-
+    <LoginContainer>
+      <ParticleBackground />
+      <LoginContent>
+        <Title>MusicVisz</Title>
+        <Slang>
+          Welcome to <b>MusicVisz</b>!<br />
+          Click the login button below to get started and see your personalized Spotify visualizations.
+        </Slang>
+        <LoginButton onClick={handleLogin}>
+          <SpotifyLogo src={spotifyLogo} alt="Logo" />
+          Login With Spotify
+        </LoginButton>
+      </LoginContent>
+      <FooterMessage>
+        🚧 <b>App in Development Mode</b>: Unauthorized users cannot access it.  
+        📩 Email <b>claudiogsdb@gmail.com</b> if interested in using it.
+      </FooterMessage>
+    </LoginContainer>
+  );
 };
 
 export default LoginPage;
