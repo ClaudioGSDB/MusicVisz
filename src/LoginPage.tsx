@@ -95,6 +95,22 @@ const Slang = styled.div`
   }
 `;
 
+const Message = styled.div`
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+  line-height: 1.5;
+  color: #333;
+
+  b {
+    color: #000;
+  }
+`;
+
 const LoginPage: React.FC = () => {
   const handleLogin = async () => {
     const clientId = import.meta.env.VITE_CLIENT_ID;
@@ -104,21 +120,27 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <LoginContainer>
-      <ParticleBackground />
-      <LoginContent>
-        <Title>MusicVisz</Title>
-        <Slang>
-          Welcome to <b>MusicVisz</b>!<br />
-          Click the login button below to get started and see your personalized Spotify visualizations.
-        </Slang>
-        <LoginButton onClick={handleLogin}>
-          <SpotifyLogo src={spotifyLogo} alt="Logo" />
-          Login With Spotify
-        </LoginButton>
-      </LoginContent>
-    </LoginContainer>
-  );
+  <LoginContainer>
+    <ParticleBackground />
+    <LoginContent>
+      <Title>MusicVisz</Title>
+      <Slang>
+        Welcome to <b>MusicVisz</b>!<br />
+        Click the login button below to get started and see your personalized Spotify visualizations.
+      </Slang>
+      <Message>
+        🚧 <b>App in Development Mode</b> 🚧<br />
+        Unauthorized users cannot access this app at the moment.<br />
+        📩 Interested in using it? Email us at <b>claudiogsdb@gmail.com</b>.
+      </Message>
+      <LoginButton onClick={handleLogin}>
+        <SpotifyLogo src={spotifyLogo} alt="Logo" />
+        Login With Spotify
+      </LoginButton>
+    </LoginContent>
+  </LoginContainer>
+);
+
 };
 
 export default LoginPage;
