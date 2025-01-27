@@ -95,22 +95,6 @@ const Slang = styled.div`
   }
 `;
 
-const Message = styled.div`
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  text-align: center;
-  line-height: 1.5;
-  color: #333;
-
-  b {
-    color: #000;
-  }
-`;
-
 const FooterMessage = styled.div`
   position: fixed;
   bottom: 10px;
