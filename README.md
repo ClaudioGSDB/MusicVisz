@@ -1,6 +1,6 @@
 # MusicVisz
 
-## THE APP IS IN DEVELOPMENT MODE WONT WORK WITH UNAUTHORIZED USERS
+## IMPORTANT: APP NO LONGER WORKING SINCE SPOTIFY DEPRECATED CERTAIN API FUNCTIONALITIES NECESSARY FOR THIS PROJECT TO WORK https://developer.spotify.com/blog/2024-11-27-changes-to-the-web-api
 
 MusicVisz is an interactive visualization tool that allows you to explore the connections and characteristics of your favorite songs on Spotify. It provides a captivating and immersive experience, revealing the intricate relationships between your top tracks based on their audio features.
 ![Sample UI](src/assets/Sample%20UI.png "Image Title")
